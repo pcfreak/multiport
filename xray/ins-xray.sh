@@ -438,11 +438,10 @@ END
 cat > /etc/systemd/system/xray.service << END
 [Unit]
 Description=XRAY ROUTING DAM COLO PENGKOL BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.carel
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -450,8 +449,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/config.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -461,11 +458,10 @@ END
 cat > /etc/systemd/system/tes.service << END
 [Unit]
 Description=XRAY ROUTING DAM COLO PENGKOL BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.care
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -473,8 +469,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/tes.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -483,11 +477,10 @@ END
 cat > /etc/systemd/system/xvmess.service << END
 [Unit]
 Description=XVMESS ROUTING GAJAH DEMAK BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.care
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -495,8 +488,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/xvmess.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -506,11 +497,10 @@ END
 cat > /etc/systemd/system/xss.service << END
 [Unit]
 Description=XSHADOWSOCKS ROUTING DAM COLO PENGKOL BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.carel
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -518,8 +508,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/xss.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -529,11 +517,10 @@ END
 cat > /etc/systemd/system/xtrojan.service << END
 [Unit]
 Description=XTROJAN ROUTING DAM COLO PENGKOL BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.carel
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -541,8 +528,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/xtrojan.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -552,11 +537,10 @@ END
 cat > /etc/systemd/system/xvless.service << END
 [Unit]
 Description=XVLESS ROUTING DAM COLO PENGKOL BY TARAP KUHING
-Documentation=https://t.me/zerossl
+Documentation=https://nekopoi.care
 After=network.target nss-lookup.target
 
 [Service]
-User=www-data
 User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
@@ -564,8 +548,6 @@ NoNewPrivileges=true
 ExecStart=/usr/local/bin/xray run -config /etc/xray/xvless.json
 Restart=on-failure
 RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
 
 [Install]
 WantedBy=multi-user.target
@@ -767,43 +749,35 @@ cat > /etc/trojan-go/uuid.txt << END
 $uuid
 END
 
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2096 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2087 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2083 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2096 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2087 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2083 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+siptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
 
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2096 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2087 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2083 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
-sudo iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2096 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2087 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2083 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
 
-sudo iptables -I INPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
-sudo iptables -I INPUT -p udp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
-sudo iptables -I OUTPUT -p tcp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
-sudo iptables -I OUTPUT -p udp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
-sudo iptables -A OUTPUT -p tcp --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
-sudo iptables -A OUTPUT -p udp --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
-
-sudo iptables-save > /etc/iptables.up.rules
-sudo iptables-restore -t < /etc/iptables.up.rules
-sudo netfilter-persistent save >/dev/null 2>&1
-sudo netfilter-persistent reload >/dev/null 2>&1
+ iptables -I INPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -I INPUT -p udp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -I OUTPUT -p tcp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -I OUTPUT -p udp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p udp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p udp --sport 443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+ netfilter-persistent save
+netfilter-persistent reload
 
 cp /root/domain /etc/xray
-cp /root/domain /usr/local/etc/xray
-cp /etc/ssl/private/fullchain.pem /etc/xray/xray.crt
-cp /etc/ssl/private/privkey.pem /etc/xray/xray.key
-#cp /etc/xray/xray.crt /home/sstp/server.crt
-#cp /etc/xray/xray.crt /home/vps/public_html/server.crt
-#cp /etc/xray/xray.key home/vps/public_html/server.crt
-rm -f ins-xray.sh >/dev/null 2>&1

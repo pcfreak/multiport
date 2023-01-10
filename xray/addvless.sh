@@ -12,49 +12,95 @@ CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
 # Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/Tarap-Kuhing/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin Dulu!!!!!!"
-echo -e "${NC}${LIGHT}Facebook : NO"
-echo -e "${NC}${LIGHT}WhatsApp : 085754292950"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Hendra2012"
-exit 0
-fi
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+date=`date +"%Y-%m-%d" -d "$dateFromServer"`
+#MYIP=$(wget -qO- ipinfo.io/ip);
+MYIP=$(wget -qO- https://ipv4.icanhazip.com);
+MYIP6=$(wget -qO- https://ipv6.icanhazip.com);
 clear
-source /var/lib/tarapkuhing/ipvps.conf
-if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/xray/domain)
-else
-domain=$IP
-fi
-tls="$(cat ~/log-install.txt | grep -w "Vless TLS" | cut -d: -f2|sed 's/ //g')"
-nontls="$(cat ~/log-install.txt | grep -w "Vless None TLS" | cut -d: -f2|sed 's/ //g')"
-until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-		read -rp "Username : " -e user
-		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
 
-		if [[ ${CLIENT_EXISTS} == '1' ]]; then
-			echo ""
-			echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
-			exit 1
-		fi
-	done
-uuid=$(cat /proc/sys/kernel/random/uuid)
+vltls="$(cat ~/log-install.txt | grep -w "VLESS WS TLS" | cut -d: -f2|sed 's/ //g')"
+vlnontls="$(cat ~/log-install.txt | grep -w "VLESS WS NON TLS" | cut -d: -f2|sed 's/ //g')"
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+read -rp "username : " -e user
+user_EXISTS=$(grep -w $user /etc/xray/xtrojan.json | wc -l)
+
+if [[ ${user_EXISTS} == '1' ]]; then
+echo ""
+echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
+exit 1
+fi
+done
+
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+read -rp "username : " -e user
+user_EXISTS=$(grep -w $user /etc/xray/xvmess.json | wc -l)
+
+if [[ ${user_EXISTS} == '1' ]]; then
+echo ""
+echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
+exit 1
+fi
+done
+
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+read -rp "username : " -e user
+user_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+
+if [[ ${user_EXISTS} == '1' ]]; then
+echo ""
+echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
+exit 1
+fi
+done
+
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+read -rp "username : " -e user
+user_EXISTS=$(grep -w $user /etc/xray/xvless.json | wc -l)
+
+if [[ ${user_EXISTS} == '1' ]]; then
+echo ""
+echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
+exit 1
+fi
+done
+
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+read -rp "username : " -e user
+user_EXISTS=$(grep -w $user /etc/xray/xss.json | wc -l)
+
+if [[ ${user_EXISTS} == '1' ]]; then
+echo ""
+echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
+exit 1
+fi
+done
+#uuid=$(openssl rand -base64 16)
+uuid=$(openssl rand -hex 7)
 read -p "Expired (Days) : " masaaktif
+#read -p "Expired (Seconds) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
-sed -i '/#xray-vless-tls$/a\#### '"$user $exp"'\
+#exp2=`date -d "$masaaktif seconds" +"%Y-%m-%d"`
+sed -i '/#vless-tls$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xvmess.json
+sed -i '/#vless-tls$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xss.json
+sed -i '/#vless-tls$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xvless.json
+sed -i '/#vless-tls$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/xtrojan.json
+sed -i '/#vless-nontls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#xray-vless-nontls$/a\#### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-xrayvless1="vless://${uuid}@${domain}:$tls?path=/vless&security=tls&encryption=none&type=ws#${user}"
-xrayvless2="vless://${uuid}@${domain}:$nontls?path=/vless&encryption=none&type=ws#${user}"
+vlesstls="vless://${uuid}@${domain}:$vltls?host=${domain}&sni=${domain}&type=ws&security=tls&path=/WISNU&encryption=none#%F0%9F%94%B0VLESS+WS+TLS+${user}"
+vlessnontls="vless://${uuid}@${domain}:$vlnontls?host=${domain}&security=none&type=ws&path=/WISNU&encryption=none#%F0%9F%94%B0VLESS+WS+NONTLS+${user}"
 systemctl restart xray.service
+systemctl restart xvless
+systemctl restart xvmess
+systemctl restart xtrojan
+systemctl restart xss
+#systemctl restart nginx
 service cron restart
 clear
 echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -66,7 +112,7 @@ echo -e "🔺️Host➡️ ${domain}"
 echo -e "🔺️Port TLS➡️ $vltls,8443,2096,2087,2053"
 echo -e "🔺️Port No TLS➡️ $vlnontls,2095,2086,2052"
 echo -e "🔺️Protokol➡️ WS"
-echo -e "🔺️Path➡️ /vless"
+echo -e "🔺️Path➡️ /WISNU"
 echo -e "🔺️User ID➡️ ${uuid}"
 echo -e "🔺️Dibuat➡️ $hariini"
 echo -e "🔺️Kadaluarsa➡️ $exp"

@@ -14,7 +14,7 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
 read -rp "Domain/Host : " -e domain
-echo "IP=$domain" >>/var/lib/wisnucs/ipvps.conf
+echo "IP=$domain" >>/var/lib/tarapkuhing/ipvps.conf
 rm -rf /etc/xray/domain
 echo $domain > /etc/xray/domain
 certv2ray
